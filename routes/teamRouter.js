@@ -1,8 +1,8 @@
 const router = require('express').Router();
 
-const index = require('../controllers/teamController');
+const team = require('../controllers/teamController');
 
-router.get('/', index.team);
-router.post('/create', index.createTeam);
+router.post('/create/:roomKey', team.createTeam);
+router.get('/room/:roomKey', team.team);
 
 module.exports = router;

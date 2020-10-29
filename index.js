@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const hbs = require('express-handlebars');
 const express = require('express');
 
+const indexRouter = require('./routes/indexRouter');
 const teamRouter = require('./routes/teamRouter.js');
 
 require('dotenv').config();
@@ -13,7 +14,8 @@ const app = express();
 
 mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 });
 
 app.engine('.hbs', hbs({
@@ -36,6 +38,7 @@ app.use(session({
     }
 }));
 
+app.use('/', indexRouter);
 app.use('/team', teamRouter);
 
 app.listen(3000, () => {

@@ -1,11 +1,14 @@
 const TeamModel = require('../models/teamModel');
+const RoomModel = require('../models/roomModel');
 
 exports.team = (req, res) => {
-    res.render('create-team');
+    res.render('create-team', {key: req.params.roomKey});
 }
 
 exports.createTeam = async (req, res) => {
     const {teamName, name} = req.body;
+    const {roomKey} = req.params;
+    console.log(roomKey);
 
     if (!teamName || !name) {
         res.render('create-team', {err: 'Missing required information!'});
@@ -23,10 +26,16 @@ exports.createTeam = async (req, res) => {
         names: [name]
     });
 
+    if (!await RoomModel.addTeam(roomKey, team._id)) {
+        res.send('The room you have tried to join no longer exists');
+        return;
+    }
+
     team.save();
 
     req.session.teamName = teamName;
     req.session.name = name;
+    req.session.room = roomKey;
     req.session.save();
 
     res.send('Your team has been created');
