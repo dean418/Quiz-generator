@@ -15,5 +15,12 @@ exports.createRoom = (req, res) => {
 
     room.save();
 
+    req.session.roomKey = roomKey;
+    req.session.save();
+
     res.redirect(`/team/room/${roomKey}`);
+}
+
+exports.joinRoom = (req, res) => {
+
 }

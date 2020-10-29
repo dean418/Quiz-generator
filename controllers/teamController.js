@@ -7,8 +7,7 @@ exports.team = (req, res) => {
 
 exports.createTeam = async (req, res) => {
     const {teamName, name} = req.body;
-    const {roomKey} = req.params;
-    console.log(roomKey);
+    const {roomKey} = req.session;
 
     if (!teamName || !name) {
         res.render('create-team', {err: 'Missing required information!'});
@@ -35,7 +34,6 @@ exports.createTeam = async (req, res) => {
 
     req.session.teamName = teamName;
     req.session.name = name;
-    req.session.room = roomKey;
     req.session.save();
 
     res.send('Your team has been created');

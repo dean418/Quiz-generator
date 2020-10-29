@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const hbs = require('express-handlebars');
 const express = require('express');
 
-const indexRouter = require('./routes/indexRouter');
+const roomRouter = require('./routes/roomRouter');
 const teamRouter = require('./routes/teamRouter.js');
 
 require('dotenv').config();
@@ -38,7 +38,7 @@ app.use(session({
     }
 }));
 
-app.use('/', indexRouter);
+app.use('/room', roomRouter);
 app.use('/team', teamRouter);
 
 app.listen(3000, () => {
