@@ -4,17 +4,17 @@ exports.team = (req, res) => {
     res.render('create-team');
 }
 
-exports.createTeam = (req, res) => {
+exports.createTeam = async (req, res) => {
     const {teamName, name} = req.body;
 
     if (!teamName || !name) {
-        res.render('index', {err: 'Missing required information!'});
+        res.render('create-team', {err: 'Missing required information!'});
         return;
     }
 
-    if (TeamModel.checkExists(teamName)) {
-        TeamModel.update({teamName}, {$push: {names: name}});
-        res.redirect('/#');
+    if (await TeamModel.checkExists(teamName)) {
+        await TeamModel.findOneAndUpdate({teamName}, {$push: {names: name}});
+        res.send('You have been added to a team');
         return;
     }
 
@@ -29,5 +29,5 @@ exports.createTeam = (req, res) => {
     req.session.name = name;
     req.session.save();
 
-    res.redirect('/#');
+    res.send('Your team has been created');
 }
