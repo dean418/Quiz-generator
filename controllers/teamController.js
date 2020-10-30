@@ -2,7 +2,7 @@ const TeamModel = require('../models/teamModel');
 const RoomModel = require('../models/roomModel');
 
 exports.team = (req, res) => {
-    res.render('create-team', {key: req.params.roomKey});
+    res.render('create-team', {key: req.session.roomKey});
 }
 
 exports.createTeam = async (req, res) => {
