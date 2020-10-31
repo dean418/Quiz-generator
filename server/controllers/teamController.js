@@ -2,7 +2,7 @@ const TeamModel = require('../models/teamModel');
 const RoomModel = require('../models/roomModel');
 
 exports.team = (req, res) => {
-    res.render('create-team', {key: req.session.roomKey});
+    res.send({key: req.session.roomKey});
 }
 
 exports.createTeam = async (req, res) => {
@@ -10,7 +10,7 @@ exports.createTeam = async (req, res) => {
     const {roomKey} = req.session;
 
     if (!teamName || !name) {
-        res.render('create-team', {err: 'Missing required information!'});
+        res.send({err: 'Missing required information!'});
         return;
     }
 
