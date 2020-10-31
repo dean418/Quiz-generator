@@ -1,10 +1,6 @@
 const TeamModel = require('../models/teamModel');
 const RoomModel = require('../models/roomModel');
 
-exports.team = (req, res) => {
-    res.send({key: req.session.roomKey});
-}
-
 exports.createTeam = async (req, res) => {
     const {teamName, name} = req.body;
     const {roomKey} = req.session;
@@ -16,7 +12,7 @@ exports.createTeam = async (req, res) => {
 
     if (await TeamModel.checkExists(teamName)) {
         await TeamModel.findOneAndUpdate({teamName}, {$push: {names: name}});
-        res.send('You have been added to a team');
+        res.send({success: true, message: 'You have been added to a team'});
         return;
     }
 
@@ -26,7 +22,7 @@ exports.createTeam = async (req, res) => {
     });
 
     if (!await RoomModel.addTeam(roomKey, team._id)) {
-        res.send('The room you have tried to join no longer exists');
+        res.send({success: false, message: 'The room you have tried to join no longer exists'});
         return;
     }
 
@@ -36,5 +32,5 @@ exports.createTeam = async (req, res) => {
     req.session.name = name;
     req.session.save();
 
-    res.send('Your team has been created');
+    res.send({success: true, message: 'Your team has been created'});
 }

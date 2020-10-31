@@ -2,10 +2,6 @@ const {v4: uuidv4} = require('uuid');
 
 const RoomModel = require('../models/roomModel');
 
-exports.index = (req, res) => {
-    res.render('index');
-}
-
 exports.createRoom = async (req, res) => {
     const roomKey = uuidv4();
 
@@ -17,8 +13,7 @@ exports.createRoom = async (req, res) => {
 
     req.session.roomKey = roomKey;
     req.session.save()
-    res.redirect('/team/room');
-
+    res.send(roomKey);
 }
 
 exports.joinRoom = async(req, res) => {
@@ -27,9 +22,9 @@ exports.joinRoom = async(req, res) => {
     if(await RoomModel.checkExists(roomKey)) {
         req.session.roomKey = roomKey;
         req.session.save();
-        res.redirect('/team/room');
+        res.send({success: true, key: roomKey});
         return;
     }
 
-    res.render('index', {err: 'Invalid room key'});
+    res.send({err: 'Invalid room key'});
 }
