@@ -14,7 +14,8 @@ const app = express();
 mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useCreateIndex: true
 });
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -35,5 +36,5 @@ app.use('/room', roomRouter);
 app.use('/team', teamRouter);
 
 app.listen(process.env.PORT, () => {
-    console.log(`server listening on port ${process.env.port}`)
+    console.log(`server listening on port ${process.env.PORT}`)
 });
