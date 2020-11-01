@@ -1,47 +1,29 @@
 import './App.css';
-import {Component} from 'react';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
+import { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-class App extends Component {
-    constructor() {
-        super();
+import Context from './context';
 
-        this.state = {
-            key: ''
-        }
-    }
+import Home from './home/home';
+import Teams from './teams/teams';
 
-    createRoom = () => {
-        fetch('http://localhost:3001/room/create')
-            .then(response => response.json())
-                .then(response => this.setState({key: response.key}));
-    }
+const App = () => {
+    const [roomKey, setRoomKey] = useState(null);
 
-    render () {
-        return (
-            <div className = "App" >
-                <Router>
-                    <nav>
-                        <ul>
-                            <li>
-                                <Link to='/'>Home</Link>
-                            </li>
-                        </ul>
-                    </nav>
+    const value = { roomKey, setRoomKey };
 
-                    <div className="roomBtns">
-                        <button onClick={this.createRoom}>Create a room</button>
-                        <button>Join a room</button>
-                    </div>
-                </Router>
-            </div>
-        );
-    }
+    return (
+        <Context.Provider value={value}>
+            <Router>
+                <div className="App" >
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route path="/teams" component={Teams} />
+                    </Switch>
+                </div>
+            </Router>
+        </Context.Provider>
+    );
 }
 
 export default App;
