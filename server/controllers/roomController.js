@@ -13,7 +13,7 @@ exports.createRoom = async (req, res) => {
 
     req.session.roomKey = roomKey;
     req.session.save()
-    res.send(roomKey);
+    res.send({key: roomKey});
 }
 
 exports.joinRoom = async(req, res) => {
