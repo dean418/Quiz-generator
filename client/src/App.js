@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Context from './context';
 
@@ -13,16 +13,16 @@ const App = () => {
     const value = { roomKey, setRoomKey };
 
     return (
-        <Context.Provider value={value}>
-            <Router>
-                <div className="App" >
-                    <Switch>
+        <Router>
+            <div className="App" >
+                <Switch>
+                    <Context.Provider value={value}>
                         <Route exact path="/" component={Home} />
                         <Route path="/teams" component={Teams} />
-                    </Switch>
-                </div>
-            </Router>
-        </Context.Provider>
+                    </Context.Provider>
+                </Switch>
+            </div>
+        </Router>
     );
 }
 
