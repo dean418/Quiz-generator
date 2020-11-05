@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Link, Redirect } from "react-router-dom";
 
+import './home.css';
 import Context from '../context';
 
 class Home extends Component {
@@ -11,7 +12,6 @@ class Home extends Component {
 
         this.state = {
             inputValue: '',
-            showInput: false,
             message: ''
         }
     }
@@ -40,7 +40,6 @@ class Home extends Component {
         response = await response.json();
 
         if (response.err) {
-            console.log(response.err);
             this.setState({ message: response.err });
             return;
         }
@@ -50,16 +49,25 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
-                <Link to="/teams" onClick={() => this.createRoom()}>Create a room</Link>
-                <p onClick={() => this.setState({ showInput: !this.state.showInput })}>Join room</p>
+            <div className='container'>
+                <span className="joinContainer">
+                    <div className="join">
+                        <form onSubmit={event => this.joinRoom(event)}>
+                            <input type="text" onChange={this.handleInputChange} className="keyInput"></input>
+                            <br/>
+                            <input type="submit" value="Join room" className="submit"/>
+                        </form>
+                        <p className="error">{this.state.message}</p>
+                    </div>
+                </span>
 
-                <form onSubmit={event => this.joinRoom(event)}>
-                    <input type="text" onChange={this.handleInputChange}></input>
-                    <input type="submit" value="Join room" />
-                </form>
+                <span className="createContainer">
+                    <div className="create">
+                        <Link to="/teams" onClick={() => this.createRoom()}v className="createBtn">Create a room</Link>
+                    </div>
+                </span>
 
-                <p>{this.state.message}</p>
+
 
                 {this.context.roomKey && <Redirect exact to="/teams"></Redirect>}
             </div>
