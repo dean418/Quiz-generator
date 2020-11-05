@@ -1,0 +1,47 @@
+.teamContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--dark-gray);
+}
+
+.notice {
+    color: white;
+}
+
+.notice > span {
+    color: var(--yellow);
+}
+
+.title {
+    color: var(--yellow);
+}
+
+.names {
+    width: 80%;
+    height: 60%;
+    margin-bottom: 5%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--light-gray);
+    box-shadow: 10px 10px 3px rgba(0, 0, 0, 0.5);
+}
+
+.team {
+    padding: 2% 4%;
+    margin: 1%;
+}
+
+.team > p {
+    color: whitesmoke;
+}
+
+.team:hover > p {
+    color: var(--yellow);
+}

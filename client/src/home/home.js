@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect } from 'react-router-dom';
 
 import './home.css';
 import Context from '../context';
@@ -49,27 +49,27 @@ class Home extends Component {
 
     render() {
         return (
-            <div className='container'>
-                <span className="joinContainer">
-                    <div className="join">
+            <div className='homeContainer'>
+                <span className='joinContainer'>
+                    <div className='join'>
                         <form onSubmit={event => this.joinRoom(event)}>
-                            <input type="text" onChange={this.handleInputChange} className="keyInput"></input>
+                            <input type='text' onChange={this.handleInputChange} className='keyInput'></input>
                             <br/>
-                            <input type="submit" value="Join room" className="submit"/>
+                            <input type='submit' value='Join room' className='submit'/>
                         </form>
-                        <p className="error">{this.state.message}</p>
+                        <p className='error'>{this.state.message}</p>
                     </div>
                 </span>
 
-                <span className="createContainer">
-                    <div className="create">
-                        <Link to="/teams" onClick={() => this.createRoom()}v className="createBtn">Create a room</Link>
+                <span className='createContainer'>
+                    <div className='create'>
+                        <Link to='/lobby' onClick={() => this.createRoom()}v className='createBtn'>Create a room</Link>
                     </div>
                 </span>
 
 
 
-                {this.context.roomKey && <Redirect exact to="/teams"></Redirect>}
+                {this.context.roomKey && <Redirect exact to='/lobby'></Redirect>}
             </div>
         )
     }

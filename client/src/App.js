@@ -1,11 +1,11 @@
 import './App.css';
 import { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Context from './context';
 
 import Home from './home/home';
-import Teams from './teams/teams';
+import Lobby from './lobby/lobby';
 
 const App = () => {
     const [roomKey, setRoomKey] = useState(null);
@@ -14,11 +14,11 @@ const App = () => {
 
     return (
         <Router>
-            <div className="App" >
+            <div className='App' >
                 <Switch>
                     <Context.Provider value={value}>
-                        <Route exact path="/" component={Home} />
-                        <Route path="/teams" component={Teams} />
+                        <Route exact path='/' component={Home} />
+                        <Route path='/lobby' component={Lobby} />
                     </Context.Provider>
                 </Switch>
             </div>
