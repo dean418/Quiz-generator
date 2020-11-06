@@ -1,9 +1,12 @@
-const {v4: uuidv4} = require('uuid');
+const {humanId} = require('human-id');
 
 const RoomModel = require('../models/roomModel');
 
 exports.createRoom = async (req, res) => {
-    const roomKey = uuidv4();
+    const roomKey = humanId({
+        separator: '-',
+        capitalize: false
+    });
 
     const room = new RoomModel({
         roomKey
