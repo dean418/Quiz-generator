@@ -33,6 +33,7 @@
 }
 
 .keyInput {
+    width: 92%;
     padding: 4%;
     border: none;
     box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.5)!important;
