@@ -1,5 +1,6 @@
 :root {
     --light-gray: #404040;
+    --light-gray-transparent: rgba(64,64,64, 0.8);
     --dark-gray: #222;
     --shadow: #101010;
     --yellow: #f5b32d;

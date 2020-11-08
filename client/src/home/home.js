@@ -2,10 +2,10 @@ import { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
 import './home.css';
-import Context from '../context';
+import { KeyContext } from '../context';
 
 class Home extends Component {
-    static contextType = Context;
+    static contextType = KeyContext;
 
     constructor() {
         super();
@@ -66,8 +66,6 @@ class Home extends Component {
                         <Link to='/lobby' onClick={() => this.createRoom()}v className='createBtn'>Create a room</Link>
                     </div>
                 </span>
-
-
 
                 {this.context.roomKey && <Redirect exact to='/lobby'></Redirect>}
             </div>

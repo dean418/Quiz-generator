@@ -1,14 +1,17 @@
 import { useContext } from 'react';
-
-import Context from '../context';
+import {KeyContext, NameContext} from '../context';
+import Input from './userNameInput';
 import './lobby.css';
 
 const Lobby = () => {
-    const state = useContext(Context);
+    const key = useContext(KeyContext);
+    const userName = useContext(NameContext);
 
     return (
         <div className='teamContainer'>
-            <h3 className='notice'>You can join this room using the key: <span>{state.roomKey}</span></h3>
+            {!userName.userName && <Input></Input>}
+
+            <h3 className='notice'>You can join this room using the key: <span>{key.roomKey}</span></h3>
             <h1 className='title'>Contestants</h1>
             <div className='names'>
                 <div className='team'>

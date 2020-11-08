@@ -1,8 +1,11 @@
 import { createContext } from 'react';
 
-const Context = createContext({
+export const KeyContext = createContext({
     roomKey: null,
-    setRoomKey: () => {}
+    setRoomKey: () => {},
 });
 
-export default Context;
+export const NameContext = createContext({
+    userName: null,
+    setUserName: () => {}
+});

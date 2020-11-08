@@ -11,7 +11,7 @@ exports.createTeam = async (req, res) => {
     }
 
     if (await TeamModel.checkExists(teamName)) {
-        await TeamModel.findOneAndUpdate({teamName}, {$push: {names: name}});
+        await TeamModel.addMember(teamName, name);
         res.send({success: true, message: 'You have been added to a team'});
         return;
     }
