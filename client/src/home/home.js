@@ -63,7 +63,7 @@ class Home extends Component {
 
                 <span className='createContainer'>
                     <div className='create'>
-                        <Link to='/lobby' onClick={() => this.createRoom()}v className='createBtn'>Create a room</Link>
+                        <Link to='/lobby' onClick={() => this.createRoom()} className='createBtn'>Create a room</Link>
                     </div>
                 </span>
 
